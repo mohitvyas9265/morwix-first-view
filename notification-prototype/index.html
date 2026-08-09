@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morwix — Notification Module (R1)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">M</div>
+      <div class="name">Mor<span>wix</span></div>
+    </div>
+    <nav class="nav">
+      <div class="group-label overline subtle">School</div>
+      <button class="nav-item" data-nav="hub">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span>Overview</span>
+      </button>
+      <button class="nav-item active" data-nav="view">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>Notices</span><span class="count">11</span>
+      </button>
+      <button class="nav-item" onclick="return false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <span>Students</span>
+      </button>
+      <button class="nav-item" onclick="return false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>Classes</span>
+      </button>
+      <button class="nav-item" onclick="return false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="avatar">MV</div>
+      <div style="min-width:0">
+        <div style="font-weight:600;font-size:13px">Mohit Vyas</div>
+        <div class="caption subtle" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Administrator</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <div class="crumbs" id="crumbs"><span>Notices</span></div>
+      <div class="spacer"></div>
+      <div class="input-icon" style="width:280px">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="input" placeholder="Search…">
+      </div>
+      <button class="icon-btn"><span class="ping"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </button>
+    </header>
+
+    <div class="content">
+
+      <!-- ==================== HUB ==================== -->
+      <section id="hub" class="screen">
+        <div class="page">
+          <div class="page-head">
+            <div>
+              <h1 class="h1">Notices</h1>
+              <p class="sub">Create, target and track notices for parents, students and staff — all from one place.</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn--secondary" data-nav="view">View all</button>
+              <button class="btn btn--primary" data-nav="create">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Create notice
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-4" style="margin-bottom:24px">
+            <div class="stat"><div class="top"><div class="ico ico--active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg></div></div><div class="num">8</div><div class="lab">Active</div></div>
+            <div class="stat"><div class="top"><div class="ico ico--sched"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div><div class="num">3</div><div class="lab">Scheduled</div></div>
+            <div class="stat"><div class="top"><div class="ico ico--draft"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div></div><div class="num">2</div><div class="lab">Drafts</div></div>
+            <div class="stat"><div class="top"><div class="ico ico--expired"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6"/></svg></div></div><div class="num">14</div><div class="lab">Expired</div></div>
+          </div>
+
+          <div class="grid grid-2" style="margin-bottom:24px">
+            <div class="entry" data-nav="create">
+              <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+              <div><div class="h4">Create a notice</div><p class="muted body-sm" style="margin-top:4px">Compose the notice, choose recipients by class &amp; section, and publish or schedule.</p></div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+            </div>
+            <div class="entry" data-nav="view">
+              <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+              <div><div class="h4">View all notices</div><p class="muted body-sm" style="margin-top:4px">Search, filter by date, class, section, status and response, and open any notice.</p></div>
+              <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__head"><div class="h4">Recent notices</div><div class="actions"><button class="btn btn--ghost btn--sm" data-nav="view">See all</button></div></div>
+            <div class="card__body" style="padding:8px 24px">
+              <div class="summary-list">
+                <div class="summary-row" data-nav="detail"><div class="ico" style="background:var(--green-50);color:var(--green-600)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="grow"><div style="font-weight:600">Annual Sports Day — Parent Consent</div><div class="cell-sub">Grades 6–10 · Response required</div></div><span class="dates muted body-sm">12–20 Aug</span><span class="badge badge--active"><span class="dot"></span>Active</span></div>
+                <div class="summary-row" data-nav="detail"><div class="ico" style="background:var(--blue-50);color:var(--blue-600)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="grow"><div style="font-weight:600">PTM Schedule — Term 1</div><div class="cell-sub">Grade 9 (A,B), Grade 10 · Response required</div></div><span class="dates muted body-sm">15–18 Aug</span><span class="badge badge--scheduled"><span class="dot"></span>Scheduled</span></div>
+                <div class="summary-row" data-nav="detail"><div class="ico" style="background:var(--slate-100);color:var(--slate-500)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="grow"><div style="font-weight:600">Science Exhibition — Volunteers</div><div class="cell-sub">Grade 8 (C), Grade 9 (A) · Response required</div></div><span class="dates muted body-sm">Not set</span><span class="badge badge--draft"><span class="dot"></span>Draft</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== CREATE (wizard) ==================== -->
+      <section id="create" class="screen">
+        <div class="page">
+          <div class="page-head">
+            <div><h1 class="h1">Create notice</h1><p class="sub">Follow the steps to compose, target and publish your notice.</p></div>
+            <div class="actions"><button class="btn btn--secondary" data-nav="view">Cancel</button></div>
+          </div>
+
+          <!-- Stepper -->
+          <div class="stepper" id="stepper">
+            <div class="step current" data-step="1"><div class="num">1</div><div class="txt"><div class="k">Step 1</div><div class="v">Details</div></div></div>
+            <div class="step-line" data-line="1"></div>
+            <div class="step" data-step="2"><div class="num">2</div><div class="txt"><div class="k">Step 2</div><div class="v">Recipients</div></div></div>
+            <div class="step-line" data-line="2"></div>
+            <div class="step" data-step="3"><div class="num">3</div><div class="txt"><div class="k">Step 3</div><div class="v">Summary</div></div></div>
+            <div class="step-line" data-line="3"></div>
+            <div class="step" data-step="4"><div class="num">4</div><div class="txt"><div class="k">Step 4</div><div class="v">Review</div></div></div>
+          </div>
+
+          <!-- Step 1: Details -->
+          <div class="wizard-step active" data-wstep="1">
+            <div class="card"><div class="card__body">
+              <div class="field">
+                <label>Notice title <span class="req">*</span></label>
+                <input class="input" id="f-title" value="Annual Sports Day — Parent Consent" placeholder="e.g. Annual Sports Day — Parent Consent">
+              </div>
+              <div class="field">
+                <label>Description <span class="req">*</span></label>
+                <textarea class="textarea" id="f-desc" placeholder="Write the notice message…">Our Annual Sports Day will be held on 20 August at the main ground. Kindly submit your consent for your child's participation and confirm attendance for the morning assembly.</textarea>
+                <span class="hint">Plain text only for Release 1. Attachments &amp; rich text arrive in a later release.</span>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Start date <span class="req">*</span></label><input type="date" class="input" id="f-start" value="2026-08-12"></div>
+                <div class="field"><label>End date <span class="req">*</span></label><input type="date" class="input" id="f-end" value="2026-08-20"></div>
+              </div>
+              <div class="divider"></div>
+              <div class="row between">
+                <div style="max-width:520px">
+                  <label style="font-weight:600;font-size:14px">Response required?</label>
+                  <p class="muted body-sm" style="margin-top:4px">Ask recipients to acknowledge or respond to this notice. You'll be able to track responses on the notice page.</p>
+                </div>
+                <div class="switch on" id="f-response"><span class="track"></span><span id="f-response-lab" style="font-weight:600;color:var(--brand-600)">Yes</span></div>
+              </div>
+            </div></div>
+            <div class="wizard-foot">
+              <div class="right">
+                <button class="btn btn--secondary" onclick="saveDraft()">Save as draft</button>
+                <button class="btn btn--primary" onclick="goStep(2)">Continue<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Recipients -->
+          <div class="wizard-step" data-wstep="2">
+            <div class="card"><div class="card__body">
+              <div class="h4" style="margin-bottom:4px">Who should receive this notice?</div>
+              <p class="muted body-sm" style="margin-bottom:20px">Pick all classes, or choose specific classes — each class can target all sections or specific sections.</p>
+              <div class="radio-cards" style="margin-bottom:24px">
+                <div class="radio-card" data-mode="all"><div class="radio"></div><div><div class="t">All classes</div><div class="d">Every class and every section receives this notice.</div></div></div>
+                <div class="radio-card on" data-mode="selected"><div class="radio on"></div><div><div class="t">Selected classes</div><div class="d">Choose specific classes and, per class, all or specific sections.</div></div></div>
+              </div>
+
+              <div id="class-builder">
+                <div class="row between" style="margin-bottom:12px"><div class="overline subtle">Classes</div><button class="btn btn--ghost btn--sm" id="toggle-all-classes">Select all</button></div>
+                <div id="class-list">
+                  <!-- rows injected by app.js -->
+                </div>
+              </div>
+
+              <div class="callout" style="margin-top:20px" id="recipient-count-callout">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span id="recipient-count-text">—</span>
+              </div>
+            </div></div>
+            <div class="wizard-foot">
+              <button class="btn btn--secondary" onclick="goStep(1)"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back</button>
+              <div class="right">
+                <button class="btn btn--secondary" onclick="saveDraft()">Save as draft</button>
+                <button class="btn btn--primary" onclick="goStep(3)">Continue<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Summary -->
+          <div class="wizard-step" data-wstep="3">
+            <div class="total-banner" style="margin-bottom:20px">
+              <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div><div class="big" id="sum-total">0</div><div class="lab">estimated recipients across <span id="sum-classes">0</span> classes</div></div>
+            </div>
+            <div class="card"><div class="card__head"><div class="h4">Recipient summary</div><button class="btn btn--ghost btn--sm" onclick="goStep(2)">Edit recipients</button></div>
+              <div class="card__body" style="padding-top:8px;padding-bottom:8px">
+                <div class="summary-list" id="summary-list"></div>
+              </div>
+            </div>
+            <div class="callout callout--warn" style="margin-top:20px">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>This is your last checkpoint to verify <strong>who</strong> receives the notice. Please review carefully — recipients can't be edited after publishing in Release 1.</span>
+            </div>
+            <label class="opt-row" id="confirm-recipients" style="margin-top:20px">
+              <span class="check"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span style="font-weight:500">I've reviewed the recipients and they're correct.</span>
+            </label>
+            <div class="wizard-foot">
+              <button class="btn btn--secondary" onclick="goStep(2)"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back</button>
+              <div class="right">
+                <button class="btn btn--secondary" onclick="saveDraft()">Save as draft</button>
+                <button class="btn btn--primary" id="to-review" onclick="goStep(4)">Continue to review<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Review & Publish -->
+          <div class="wizard-step" data-wstep="4">
+            <div class="card"><div class="card__head"><div class="h4">Review &amp; publish</div><span class="badge badge--scheduled" id="will-status"><span class="dot"></span>Will schedule</span></div>
+              <div class="card__body">
+                <dl class="review-grid">
+                  <dt>Title</dt><dd id="rv-title" style="font-weight:600">—</dd>
+                  <dt>Description</dt><dd id="rv-desc" class="muted">—</dd>
+                  <dt>Effective period</dt><dd id="rv-dates">—</dd>
+                  <dt>Response required</dt><dd id="rv-response">—</dd>
+                  <dt>Recipients</dt><dd id="rv-recipients"><div class="summary-list" id="rv-recipients-list" style="margin-top:-8px"></div></dd>
+                </dl>
+              </div>
+            </div>
+            <div class="callout" style="margin-top:20px">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span id="publish-note">Because the start date is in the future, this notice will be <strong>Scheduled</strong> and go live automatically on its start date.</span>
+            </div>
+            <div class="wizard-foot">
+              <button class="btn btn--secondary" onclick="goStep(3)"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back</button>
+              <div class="right">
+                <button class="btn btn--secondary" onclick="saveDraft()">Save as draft</button>
+                <button class="btn btn--primary" onclick="publishNotice()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Publish notice</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW NOTICES ==================== -->
+      <section id="view" class="screen">
+        <div class="page">
+          <div class="page-head">
+            <div><h1 class="h1">All notices</h1><p class="sub">Search and filter every notice by date, class, section, status and response.</p></div>
+            <div class="actions"><button class="btn btn--primary" data-nav="create"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Create notice</button></div>
+          </div>
+
+          <div class="toolbar">
+            <div class="input-icon search">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input class="input" placeholder="Search notices by title…">
+            </div>
+            <div class="filters">
+              <div class="filter"><select class="select-el"><option>Any date</option><option>This week</option><option>This month</option></select><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="filter"><select class="select-el"><option>All classes</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option></select><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="filter"><select class="select-el"><option>All sections</option><option>A</option><option>B</option><option>C</option><option>D</option></select><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="filter"><select class="select-el"><option>Any status</option><option>Active</option><option>Scheduled</option><option>Draft</option><option>Expired</option></select><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="filter"><select class="select-el"><option>Any response</option><option>Required</option><option>Not required</option></select><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:34%">Notice</th><th>Audience</th><th>Effective period</th><th>Response</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr data-nav="detail">
+                  <td><div class="cell-title">Annual Sports Day — Parent Consent</div><div class="cell-sub">Created 06 Aug 2026</div></td>
+                  <td><div class="aud"><span class="tag">Grades 6–10</span></div></td>
+                  <td class="dates">12 Aug – 20 Aug</td>
+                  <td><span class="pill pill--req">Required</span></td>
+                  <td><span class="badge badge--active"><span class="dot"></span>Active</span></td>
+                  <td class="row-menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></td>
+                </tr>
+                <tr data-nav="detail">
+                  <td><div class="cell-title">PTM Schedule — Term 1</div><div class="cell-sub">Created 05 Aug 2026</div></td>
+                  <td><div class="aud"><span class="tag">Grade 9 (A,B)</span><span class="tag">Grade 10</span></div></td>
+                  <td class="dates">15 Aug – 18 Aug</td>
+                  <td><span class="pill pill--req">Required</span></td>
+                  <td><span class="badge badge--scheduled"><span class="dot"></span>Scheduled</span></td>
+                  <td class="row-menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></td>
+                </tr>
+                <tr data-nav="detail">
+                  <td><div class="cell-title">Library Book Return Reminder</div><div class="cell-sub">Created 04 Aug 2026</div></td>
+                  <td><div class="aud"><span class="tag tag--all">All classes</span></div></td>
+                  <td class="dates">05 Aug – 09 Aug</td>
+                  <td><span class="pill pill--no">Not required</span></td>
+                  <td><span class="badge badge--active"><span class="dot"></span>Active</span></td>
+                  <td class="row-menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></td>
+                </tr>
+                <tr data-nav="detail">
+                  <td><div class="cell-title">Science Exhibition — Volunteers</div><div class="cell-sub">Created 04 Aug 2026</div></td>
+                  <td><div class="aud"><span class="tag">Grade 8 (C)</span><span class="tag">Grade 9 (A)</span></div></td>
+                  <td class="dates">Not set</td>
+                  <td><span class="pill pill--req">Required</span></td>
+                  <td><span class="badge badge--draft"><span class="dot"></span>Draft</span></td>
+                  <td class="row-menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></td>
+                </tr>
+                <tr data-nav="detail">
+                  <td><div class="cell-title">Fee Payment Due — Quarter 2</div><div class="cell-sub">Created 28 Jul 2026</div></td>
+                  <td><div class="aud"><span class="tag">Grades 6–8</span></div></td>
+                  <td class="dates">01 Aug – 10 Aug</td>
+                  <td><span class="pill pill--req">Required</span></td>
+                  <td><span class="badge badge--expired"><span class="dot"></span>Expired</span></td>
+                  <td class="row-menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></td>
+                </tr>
+                <tr data-nav="detail">
+                  <td><div class="cell-title">Uniform Policy Update 2026–27</div><div class="cell-sub">Created 27 Jul 2026</div></td>
+                  <td><div class="aud"><span class="tag tag--all">All classes</span></div></td>
+                  <td class="dates">22 Aug – 30 Aug</td>
+                  <td><span class="pill pill--no">Not required</span></td>
+                  <td><span class="badge badge--scheduled"><span class="dot"></span>Scheduled</span></td>
+                  <td class="row-menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row between" style="margin-top:16px;color:var(--text-tertiary)" class="body-sm">
+            <span class="body-sm subtle">Showing 6 of 27 notices</span>
+            <div class="row" style="gap:8px"><button class="btn btn--secondary btn--sm" disabled>Previous</button><button class="btn btn--secondary btn--sm">Next</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== NOTICE DETAILS ==================== -->
+      <section id="detail" class="screen">
+        <div class="page">
+          <button class="btn btn--ghost btn--sm" data-nav="view" style="margin-bottom:16px;padding-left:8px"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>All notices</button>
+          <div class="page-head">
+            <div>
+              <div class="row" style="gap:12px;margin-bottom:8px"><h1 class="h1" style="margin:0">Annual Sports Day — Parent Consent</h1><span class="badge badge--active" style="align-self:center"><span class="dot"></span>Active</span></div>
+              <p class="sub" style="margin:0">Grades 6–10 · Response required · Published 06 Aug 2026</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn--secondary"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Duplicate</button>
+            </div>
+          </div>
+
+          <div class="meta-row">
+            <div class="m"><div class="k">Status</div><div class="v"><span class="badge badge--active"><span class="dot"></span>Active</span></div></div>
+            <div class="m"><div class="k">Start date</div><div class="v">12 Aug 2026</div></div>
+            <div class="m"><div class="k">End date</div><div class="v">20 Aug 2026</div></div>
+            <div class="m"><div class="k">Response</div><div class="v"><span class="pill pill--req">Required</span></div></div>
+            <div class="m"><div class="k">Created by</div><div class="v">Mohit Vyas</div></div>
+          </div>
+
+          <div class="detail-grid">
+            <div>
+              <div class="section-title h4 mt-0">Message</div>
+              <div class="card"><div class="card__body">
+                <p class="body-lg" style="line-height:26px;color:var(--text-secondary)">Our Annual Sports Day will be held on 20 August at the main ground. Kindly submit your consent for your child's participation and confirm attendance for the morning assembly. Students should report in their house T-shirts by 7:30 AM. Refreshments will be provided.</p>
+              </div></div>
+
+              <div class="section-title h4"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Recipients</div>
+              <div class="card"><div class="card__body" style="padding-top:8px;padding-bottom:8px">
+                <div class="summary-list">
+                  <div class="summary-row"><div class="ico">6</div><div class="grow"><div style="font-weight:600">Grade 6</div><div class="secs"><span class="tag tag--all">All sections</span></div></div><span class="muted body-sm">≈ 120</span></div>
+                  <div class="summary-row"><div class="ico">7</div><div class="grow"><div style="font-weight:600">Grade 7</div><div class="secs"><span class="tag">A</span><span class="tag">C</span></div></div><span class="muted body-sm">≈ 62</span></div>
+                  <div class="summary-row"><div class="ico">8</div><div class="grow"><div style="font-weight:600">Grade 8</div><div class="secs"><span class="tag tag--all">All sections</span></div></div><span class="muted body-sm">≈ 118</span></div>
+                  <div class="summary-row"><div class="ico">9</div><div class="grow"><div style="font-weight:600">Grade 9</div><div class="secs"><span class="tag tag--all">All sections</span></div></div><span class="muted body-sm">≈ 116</span></div>
+                  <div class="summary-row"><div class="ico">10</div><div class="grow"><div style="font-weight:600">Grade 10</div><div class="secs"><span class="tag">B</span></div></div><span class="muted body-sm">≈ 30</span></div>
+                </div>
+              </div></div>
+            </div>
+
+            <div>
+              <div class="section-title h4 mt-0">Responses</div>
+              <div class="card"><div class="card__body">
+                <div class="ring" style="--p:68"><div class="in"><div class="n">68%</div><div class="l">responded</div></div></div>
+                <div class="row between" style="margin:20px 0 4px"><span class="muted body-sm">Responded</span><span style="font-weight:600">342</span></div>
+                <div class="row between" style="margin-bottom:16px"><span class="muted body-sm">Awaiting</span><span style="font-weight:600">164</span></div>
+                <div class="divider" style="margin:16px 0"></div>
+                <div class="overline subtle" style="margin-bottom:12px">By grade</div>
+                <div class="resp-row"><div class="rt"><span class="muted">Grade 6</span><span class="v">82%</span></div><div class="progress"><div class="bar" style="width:82%"></div></div></div>
+                <div class="resp-row"><div class="rt"><span class="muted">Grade 7 (A,C)</span><span class="v">74%</span></div><div class="progress"><div class="bar" style="width:74%"></div></div></div>
+                <div class="resp-row"><div class="rt"><span class="muted">Grade 8</span><span class="v">61%</span></div><div class="progress"><div class="bar" style="width:61%"></div></div></div>
+                <div class="resp-row"><div class="rt"><span class="muted">Grade 9</span><span class="v">57%</span></div><div class="progress"><div class="bar" style="width:57%"></div></div></div>
+                <div class="resp-row"><div class="rt"><span class="muted">Grade 10 (B)</span><span class="v">70%</span></div><div class="progress"><div class="bar" style="width:70%"></div></div></div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
