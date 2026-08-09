@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morwix — Notification Module (R1) · Mobile app view</title>
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+<div class="stage">
+  <div class="stage-head">
+    <div class="row"><div class="logo">M</div><div><div style="font-weight:800;font-size:18px">Mor<span style="color:var(--brand-600)">wix</span></div><div class="sub" style="font-size:12px">Notification Module · Release 1</div></div></div>
+    <h1>Mobile app view</h1>
+    <p>How the notice system feels as a native app — the <strong>Parent/Student</strong> side (receive &amp; respond) and the <strong>Admin</strong> side (create &amp; manage), built on the same design tokens.</p>
+    <div class="switcher" id="switcher">
+      <button data-f="all" class="on">All</button>
+      <button data-f="parent">Parent / Student</button>
+      <button data-f="admin">Admin</button>
+    </div>
+  </div>
+
+  <!-- ============ PARENT / STUDENT APP ============ -->
+  <section class="group" data-group="parent">
+    <div class="group-title"><span class="k">Parent / Student</span><div><h2>The app a parent opens</h2><p>Get notices, see what needs a response, and reply in a tap.</p></div></div>
+    <div class="gallery">
+
+      <!-- P1 Lock screen push -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m lock">
+          <div class="statusbar light"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="clock"><div class="date">Sunday, 9 August</div><div class="time">9:41</div></div>
+          <div class="notis">
+            <div class="push"><div class="pic">M</div><div class="grow"><div class="app"><span>Morwix</span><span>now</span></div><div class="pt">New notice · Response needed</div><div class="pb">Annual Sports Day — Parent Consent. Please respond by 20 Aug.</div></div></div>
+            <div class="push dim"><div class="pic">M</div><div class="grow"><div class="app"><span>Morwix</span><span>2h ago</span></div><div class="pt">PTM Schedule — Term 1</div><div class="pb">Meeting slots for Grade 7 are now open.</div></div></div>
+            <div class="grabber"></div>
+          </div>
+        </div></div>
+        <div class="cap"><div class="t">Push notification</div><div class="d">Lock-screen alert for a new notice</div></div>
+      </div>
+
+      <!-- P2 Feed -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="title">Notices</div><div class="ab-av">AV</div></div>
+          <div class="m-content">
+            <div class="sub" style="font-size:12px;margin:-2px 2px 0">For Aarav · Grade 7 — A</div>
+            <div class="m-sec">Action needed · <span class="n">2</span></div>
+            <div class="m-card attn"><div class="li"><span class="unread"></span><div class="grow"><div class="ttl">Annual Sports Day — Parent Consent</div><div class="meta"><span class="badge badge--active"><span class="dot"></span>Active</span> Due 20 Aug</div></div></div><div class="foot"><span class="pill pill--action">Consent needed</span><button class="mbtn sm primary" style="width:auto;padding:0 14px;background:var(--brand-600);color:#fff">Respond</button></div></div>
+            <div class="m-card attn"><div class="li"><span class="unread"></span><div class="grow"><div class="ttl">PTM Schedule — Term 1</div><div class="meta"><span class="badge badge--scheduled"><span class="dot"></span>Scheduled</span> Opens 15 Aug</div></div></div><div class="foot"><span class="pill pill--action">Pick a slot</span><button class="mbtn sm primary" style="width:auto;padding:0 14px;background:var(--brand-600);color:#fff">Respond</button></div></div>
+            <div class="m-sec">Earlier</div>
+            <div class="m-card"><div class="li"><div class="ic ic--slate"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div class="grow"><div class="ttl" style="font-size:13.5px">Library Book Return Reminder</div><div class="meta"><span class="badge badge--active"><span class="dot"></span>Active</span> No response needed</div></div></div></div>
+            <div class="m-card"><div class="li"><div class="ic ic--amber"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><div class="grow"><div class="ttl" style="font-size:13.5px">Fee Payment — Quarter 2</div><div class="meta"><span class="badge badge--expired"><span class="dot"></span>Expired</span> Responded ✓</div></div></div></div>
+          </div>
+          <div class="tabbar"><div class="tab"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div><div class="tab active"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Notices</span></div><div class="tab"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div></div>
+        </div></div>
+        <div class="cap"><div class="t">Notices feed</div><div class="d">Action-needed surfaced first</div></div>
+      </div>
+
+      <!-- P3 Notice detail (action needed) -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="ab-btn"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div><div class="title sm">Notice</div></div>
+          <div class="m-content">
+            <div class="row"><span class="badge badge--active"><span class="dot"></span>Active</span><span class="sub" style="font-size:12px">12–20 Aug 2026</span></div>
+            <div style="font-size:19px;font-weight:700;line-height:25px;letter-spacing:-.01em">Annual Sports Day — Parent Consent</div>
+            <div class="sub" style="font-size:12.5px;margin-top:-4px">From Administration · 6 Aug</div>
+            <div class="muted" style="font-size:13.5px;line-height:21px">Our Annual Sports Day will be held on 20 August at the main ground. Kindly submit your consent for Aarav's participation and confirm attendance for the morning assembly. Students report in house T-shirts by 7:30 AM.</div>
+            <div class="divider"></div>
+            <div class="row" style="gap:8px"><svg class="solid" viewBox="0 0 24 24" style="width:16px;height:16px;color:var(--amber-600)"><circle cx="12" cy="12" r="10"/></svg><span class="sub" style="font-size:12px">A response is requested from the parent/guardian.</span></div>
+          </div>
+          <div class="action-dock">
+            <div class="lab"><svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Response required by 20 Aug</div>
+            <div class="row" style="gap:10px"><button class="mbtn mbtn--secondary">Can't attend</button><button class="mbtn mbtn--primary"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Give consent</button></div>
+          </div>
+        </div></div>
+        <div class="cap"><div class="t">Notice · response required</div><div class="d">Consent action docked at the bottom</div></div>
+      </div>
+
+      <!-- P4 Responded -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="ab-btn"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div><div class="title sm">Notice</div></div>
+          <div class="m-content">
+            <div class="row"><span class="badge badge--active"><span class="dot"></span>Active</span><span class="sub" style="font-size:12px">12–20 Aug 2026</span></div>
+            <div style="font-size:19px;font-weight:700;line-height:25px;letter-spacing:-.01em">Annual Sports Day — Parent Consent</div>
+            <div class="sub" style="font-size:12.5px;margin-top:-4px">From Administration · 6 Aug</div>
+            <div class="muted" style="font-size:13.5px;line-height:21px">Our Annual Sports Day will be held on 20 August at the main ground. Kindly submit your consent for Aarav's participation and confirm attendance for the morning assembly.</div>
+            <div class="m-card" style="background:var(--green-50);border-color:var(--green-100);margin-top:4px"><div class="li"><div class="ic" style="background:var(--green-600);color:#fff"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="grow"><div class="ttl" style="color:var(--green-700)">Consent given</div><div class="meta" style="color:var(--green-700);opacity:.85">Submitted 9 Aug · 9:42 AM</div></div></div></div>
+          </div>
+          <div class="action-dock"><button class="mbtn mbtn--secondary">Change response</button></div>
+        </div></div>
+        <div class="cap"><div class="t">After responding</div><div class="d">Clear confirmation of the reply</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ ADMIN APP ============ -->
+  <section class="group" data-group="admin">
+    <div class="group-title"><span class="k">Admin</span><div><h2>The app an administrator uses</h2><p>Create, target and track notices from a phone — the full R1 flow.</p></div></div>
+    <div class="gallery">
+
+      <!-- A1 Home -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="title">Notices</div><div class="ab-btn round"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div>
+          <div class="m-content">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div class="m-card" style="padding:12px"><div class="ic--green" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg></div><div style="font-size:24px;font-weight:800;margin-top:8px;letter-spacing:-.02em">8</div><div class="sub" style="font-size:12px">Active</div></div>
+              <div class="m-card" style="padding:12px"><div class="ic--blue" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div style="font-size:24px;font-weight:800;margin-top:8px;letter-spacing:-.02em">3</div><div class="sub" style="font-size:12px">Scheduled</div></div>
+              <div class="m-card" style="padding:12px"><div class="ic--slate" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><div style="font-size:24px;font-weight:800;margin-top:8px;letter-spacing:-.02em">2</div><div class="sub" style="font-size:12px">Drafts</div></div>
+              <div class="m-card" style="padding:12px"><div class="ic--amber" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div style="font-size:24px;font-weight:800;margin-top:8px;letter-spacing:-.02em">14</div><div class="sub" style="font-size:12px">Expired</div></div>
+            </div>
+            <button class="mbtn mbtn--primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Create notice</button>
+            <div class="m-sec">Recent</div>
+            <div class="m-card"><div class="li"><div class="ic ic--green"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="grow"><div class="ttl" style="font-size:13.5px">Annual Sports Day</div><div class="meta">Grades 6–10 · <span class="badge badge--active"><span class="dot"></span>Active</span></div></div></div></div>
+            <div class="m-card"><div class="li"><div class="ic ic--blue"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="grow"><div class="ttl" style="font-size:13.5px">PTM Schedule — Term 1</div><div class="meta">Grade 9,10 · <span class="badge badge--scheduled"><span class="dot"></span>Scheduled</span></div></div></div></div>
+          </div>
+          <div class="tabbar"><div class="tab active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg><span>Overview</span></div><div class="tab"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>Notices</span></div><div class="tab"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div></div>
+        </div></div>
+        <div class="cap"><div class="t">Admin overview</div><div class="d">Status counts + quick create</div></div>
+      </div>
+
+      <!-- A2 Create · Details -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="ab-btn"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div><div class="title sm">Create notice</div></div>
+          <div class="m-content">
+            <div class="mstep"><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+            <div class="sub" style="font-size:12px;font-weight:600;margin:-2px 0">Step 1 of 4 · Details</div>
+            <div class="m-field"><label>Notice title</label><div class="m-input">Annual Sports Day — Parent Consent</div></div>
+            <div class="m-field"><label>Description</label><div class="m-input m-textarea">Our Annual Sports Day will be held on 20 August. Kindly submit consent…</div></div>
+            <div class="m-2"><div class="m-field"><label>Start</label><div class="m-input">12 Aug 2026</div></div><div class="m-field"><label>End</label><div class="m-input">20 Aug 2026</div></div></div>
+            <div class="m-card" style="padding:12px"><div class="row" style="justify-content:space-between"><div><div style="font-weight:600;font-size:13.5px">Response required?</div><div class="sub" style="font-size:11.5px;margin-top:2px">Ask parents to acknowledge</div></div><div class="switch"><span class="tk"></span></div></div></div>
+          </div>
+          <div class="action-dock"><button class="mbtn mbtn--primary">Continue</button></div>
+        </div></div>
+        <div class="cap"><div class="t">Create · Details</div><div class="d">Step 1 — title, dates, response</div></div>
+      </div>
+
+      <!-- A3 Create · Recipients -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="ab-btn"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div><div class="title sm">Create notice</div></div>
+          <div class="m-content" style="gap:10px">
+            <div class="mstep"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+            <div class="sub" style="font-size:12px;font-weight:600;margin:-2px 0">Step 2 of 4 · Recipients</div>
+            <div class="seg" style="align-self:flex-start"><span>All classes</span><span class="on">Selected</span></div>
+            <div class="m-card" style="padding:11px"><div class="row"><span class="mcheck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><div class="grow" style="font-weight:600;font-size:13.5px">Grade 6</div><div class="seg"><span class="on">All</span><span>Specific</span></div></div></div>
+            <div class="m-card" style="padding:11px"><div class="row"><span class="mcheck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><div class="grow" style="font-weight:600;font-size:13.5px">Grade 7</div><div class="seg"><span>All</span><span class="on">Specific</span></div></div><div class="row" style="gap:7px;margin-top:10px;padding-left:32px"><span class="secchip on">A</span><span class="secchip">B</span><span class="secchip on">C</span><span class="secchip">D</span></div></div>
+            <div class="m-card" style="padding:11px"><div class="row"><span class="mcheck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><div class="grow" style="font-weight:600;font-size:13.5px">Grade 10</div><div class="seg"><span>All</span><span class="on">Specific</span></div></div><div class="row" style="gap:7px;margin-top:10px;padding-left:32px"><span class="secchip">A</span><span class="secchip on">B</span><span class="secchip">C</span><span class="secchip">D</span></div></div>
+            <div class="pill pill--req" style="align-self:flex-start;padding:7px 12px"><svg viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>≈ 445 recipients · 5 classes</div>
+          </div>
+          <div class="action-dock"><button class="mbtn mbtn--primary">Continue</button></div>
+        </div></div>
+        <div class="cap"><div class="t">Create · Recipients</div><div class="d">Per-class section targeting</div></div>
+      </div>
+
+      <!-- A4 Create · Review -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="ab-btn"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div><div class="title sm">Create notice</div></div>
+          <div class="m-content">
+            <div class="mstep"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span></div>
+            <div class="row" style="justify-content:space-between"><span class="sub" style="font-size:12px;font-weight:600">Step 4 of 4 · Review</span><span class="badge badge--scheduled"><span class="dot"></span>Will schedule</span></div>
+            <div class="m-card"><div style="font-weight:700;font-size:14px">Annual Sports Day — Parent Consent</div><div class="sub" style="font-size:12.5px;margin-top:6px;line-height:18px">Submit consent for participation and confirm morning-assembly attendance.</div>
+              <div class="divider" style="margin:10px 0"></div>
+              <div class="row" style="justify-content:space-between;font-size:12.5px"><span class="sub">Effective</span><b>12 – 20 Aug 2026</b></div>
+              <div class="row" style="justify-content:space-between;font-size:12.5px;margin-top:8px"><span class="sub">Response</span><span class="pill pill--req">Required</span></div>
+              <div class="row" style="justify-content:space-between;font-size:12.5px;margin-top:8px"><span class="sub">Recipients</span><b>≈ 445 · 5 classes</b></div>
+            </div>
+            <div class="m-card" style="background:var(--blue-50);border-color:var(--blue-100)"><div class="row" style="gap:9px;align-items:flex-start"><svg viewBox="0 0 24 24" style="width:17px;height:17px;color:var(--blue-600);flex:none;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span style="font-size:12px;color:var(--blue-700);line-height:17px">Start date is in the future — this notice will go live automatically on 12 Aug.</span></div></div>
+          </div>
+          <div class="action-dock"><button class="mbtn mbtn--primary"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Publish notice</button></div>
+        </div></div>
+        <div class="cap"><div class="t">Create · Review</div><div class="d">Confirm &amp; publish/schedule</div></div>
+      </div>
+
+      <!-- A5 View list -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="title">All notices</div><div class="ab-btn round"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div>
+          <div class="m-content" style="gap:10px">
+            <div class="chipscroll"><span class="fchip on">All</span><span class="fchip">Active</span><span class="fchip">Scheduled</span><span class="fchip">Draft</span><span class="fchip">Expired</span></div>
+            <div class="m-card"><div class="ttl" style="font-size:13.5px">Annual Sports Day — Parent Consent</div><div class="foot" style="margin-top:8px"><span class="pill">Grades 6–10 · 12–20 Aug</span><span class="badge badge--active"><span class="dot"></span>Active</span></div></div>
+            <div class="m-card"><div class="ttl" style="font-size:13.5px">PTM Schedule — Term 1</div><div class="foot" style="margin-top:8px"><span class="pill">Grade 9,10 · 15–18 Aug</span><span class="badge badge--scheduled"><span class="dot"></span>Scheduled</span></div></div>
+            <div class="m-card"><div class="ttl" style="font-size:13.5px">Library Book Return Reminder</div><div class="foot" style="margin-top:8px"><span class="pill">All classes · 05–09 Aug</span><span class="badge badge--active"><span class="dot"></span>Active</span></div></div>
+            <div class="m-card"><div class="ttl" style="font-size:13.5px">Science Exhibition — Volunteers</div><div class="foot" style="margin-top:8px"><span class="pill">Gr 8(C), 9(A)</span><span class="badge badge--draft"><span class="dot"></span>Draft</span></div></div>
+            <div class="m-card"><div class="ttl" style="font-size:13.5px">Fee Payment — Quarter 2</div><div class="foot" style="margin-top:8px"><span class="pill">Grades 6–8 · 01–10 Aug</span><span class="badge badge--expired"><span class="dot"></span>Expired</span></div></div>
+          </div>
+          <div class="tabbar"><div class="tab"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg><span>Overview</span></div><div class="tab active"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>Notices</span></div><div class="tab"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div></div>
+        </div></div>
+        <div class="cap"><div class="t">All notices</div><div class="d">Filter chips + status badges</div></div>
+      </div>
+
+      <!-- A6 Notice detail (responses) -->
+      <div class="device">
+        <div class="phone"><div class="island"></div><div class="screen-m">
+          <div class="statusbar"><span>9:41</span><span class="sb-r"><span class="sig"><i></i><i></i><i></i><i></i></span><svg class="wifi" viewBox="0 0 18 13"><path d="M1 4.5a12 12 0 0 1 16 0"/><path d="M4 7.5a8 8 0 0 1 10 0"/><path d="M6.7 10.3a4 4 0 0 1 4.6 0"/></svg><span class="batt"><b></b></span></span></div>
+          <div class="appbar"><div class="ab-btn"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div><div class="title sm">Notice</div></div>
+          <div class="m-content" style="gap:10px">
+            <div class="row"><span class="badge badge--active"><span class="dot"></span>Active</span><span class="sub" style="font-size:12px">12–20 Aug · Response required</span></div>
+            <div style="font-size:17px;font-weight:700;line-height:23px;letter-spacing:-.01em">Annual Sports Day — Parent Consent</div>
+            <div class="m-card"><div class="center" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-tertiary);margin-bottom:8px">Responses</div>
+              <div class="ring" style="--p:68"><div class="in"><div class="n">68%</div><div class="l">responded</div></div></div>
+              <div class="row" style="justify-content:space-around;margin-top:12px"><div class="center"><div style="font-weight:800;font-size:16px">342</div><div class="sub" style="font-size:11px">Responded</div></div><div class="center"><div style="font-weight:800;font-size:16px">164</div><div class="sub" style="font-size:11px">Awaiting</div></div></div>
+            </div>
+            <div class="m-card"><div class="sub" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">By grade</div>
+              <div class="rrow" style="margin-top:0"><div class="rt"><span class="muted">Grade 6</span><b>82%</b></div><div class="mprog"><div class="bar" style="width:82%"></div></div></div>
+              <div class="rrow"><div class="rt"><span class="muted">Grade 7 (A,C)</span><b>74%</b></div><div class="mprog"><div class="bar" style="width:74%"></div></div></div>
+              <div class="rrow"><div class="rt"><span class="muted">Grade 10 (B)</span><b>70%</b></div><div class="mprog"><div class="bar" style="width:70%"></div></div></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="cap"><div class="t">Notice · responses</div><div class="d">Live response tracking</div></div>
+      </div>
+
+    </div>
+  </section>
+</div>
+<script src="mobile.js"></script>
+</body>
+</html>
