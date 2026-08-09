@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Morwix — Notification Module | Release 1</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#18202a;--muted:#667085;--border:#e5e7eb;--primary:#4f46e5;--soft:#eef2ff;--green:#15803d;--greenbg:#ecfdf3;--amber:#b45309;--amberbg:#fffbeb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1180px;margin:auto;padding:32px 24px 70px}.hero{background:linear-gradient(135deg,#111827,#312e81);color:white;padding:42px;border-radius:20px;margin-bottom:28px}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;opacity:.75}h1{font-size:40px;line-height:1.15;margin:8px 0}h2{margin-top:42px;font-size:26px}h3{margin-top:24px}.subtitle{font-size:18px;color:#dbeafe;max-width:800px}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.pill{background:#ffffff1f;border-radius:999px;padding:5px 11px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.callout{border-left:4px solid var(--primary);background:var(--soft);padding:14px 17px;border-radius:8px}.success{border-color:var(--green);background:var(--greenbg)}.warning{border-color:var(--amber);background:var(--amberbg)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}th{background:#f9fafb;font-size:13px}code{background:#f1f5f9;padding:2px 6px;border-radius:4px}pre{background:#111827;color:#e5e7eb;padding:20px;border-radius:12px;overflow:auto;font-size:13px}
+.screen{border:1px solid var(--border);border-radius:12px;padding:18px;background:#fcfcfd}.row{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:9px 0}.muted{color:var(--muted);font-size:13px}.status{display:inline-block;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700}.draft{background:#f3f4f6}.active{background:#ecfdf3;color:#15803d}.expired{background:#f3f4f6;color:#6b7280}
+footer{margin-top:45px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}@media(max-width:800px){.grid,.grid2{grid-template-columns:1fr}h1{font-size:32px}}
+</style>
+</head>
+<body><main>
+
+<section class="hero">
+<div class="eyebrow">Morwix Product Specification</div>
+<h1>Notification / Notice Module</h1>
+<p class="subtitle">Release 1 — user flow, UX decisions, recipient targeting, screens, status model and future-release considerations.</p>
+<div class="pills"><span class="pill">School Management Platform</span><span class="pill">Parents • Students • Schools</span><span class="pill">Release 1</span><span class="pill">Proposed</span></div>
+</section>
+
+<h2>1. Purpose</h2>
+<div class="card">
+<p>Release 1 should allow a school administrator to create and manage notices and target them precisely to classes and sections.</p>
+<div class="callout"><strong>Core principle:</strong> use one flexible <strong>recipient-selection system</strong> rather than separate flows for all classes, a few classes, or arbitrary class/section combinations.</div>
+</div>
+
+<h2>2. Release 1 Scope</h2>
+<div class="grid">
+<div class="card"><h3>Create Notice</h3><p>Create, target, configure responses, review and publish or save as draft.</p></div>
+<div class="card"><h3>View Notices</h3><p>Search, filter and open notices to see their complete details and responses.</p></div>
+<div class="card"><h3>Recipient Targeting</h3><p>Support school-wide, selected-class, and class-specific section targeting.</p></div>
+</div>
+
+<h2>3. Core Product Model</h2>
+<div class="grid2">
+<div class="card"><h3>Notice = What</h3><p>Title, description and the message.</p></div>
+<div class="card"><h3>Recipients = Who</h3><p>The classes and sections that should receive it.</p></div>
+<div class="card"><h3>Schedule = When</h3><p>Start and end dates for the effective period.</p></div>
+<div class="card"><h3>Response = What is expected</h3><p>Whether recipients need to respond and which options are available.</p></div>
+</div>
+
+<h2>4. Recommended User Flow</h2>
+<div class="card"><pre>
+                         NOTICES
+                            |
+             +--------------+--------------+
+             |                             |
+        CREATE NOTICE                 VIEW NOTICES
+             |                             |
+             v                             +-- Search
+       NOTICE DETAILS                      +-- Date
+             |                             +-- Class
+             v                             +-- Section
+        RESPONSE                           +-- Status
+             |                             +-- Response
+             v
+        RECIPIENTS
+             |
+       +-----+-----+
+       |           |
+   All Classes   Selected Classes
+                     |
+                     v
+              For each selected class
+                     |
+              +------+------+
+              |             |
+         All Sections   Specific Sections
+                            |
+                            v
+                      Select sections
+                            |
+                            v
+                   RECIPIENT SUMMARY
+                            |
+                            v
+                     REVIEW NOTICE
+                            |
+                    +-------+-------+
+                    |               |
+                Save Draft       Publish
+                                    |
+                                    v
+                                  ACTIVE
+                                    |
+                                    v
+                                  EXPIRED
+</pre></div>
+
+<h2>5. Create Notice</h2>
+<div class="card">
+<h3>Step 1 — Notice Details</h3>
+<table><tr><th>Field</th><th>Required</th><th>Notes</th></tr>
+<tr><td>Notice Title</td><td>Yes</td><td>Short, meaningful title.</td></tr>
+<tr><td>Description</td><td>Yes</td><td>Main notice content.</td></tr>
+<tr><td>Start Date</td><td>Yes</td><td>When the notice becomes effective.</td></tr>
+<tr><td>End Date</td><td>Yes</td><td>When it stops being active.</td></tr></table>
+
+<h3>Step 2 — Response</h3>
+<p>Use <strong>“Response Required?”</strong> instead of a generic “Type” field.</p>
+<ul><li><strong>No</strong> — informational notice only.</li><li><strong>Yes</strong> — configure response options.</li></ul>
+<div class="callout">Release 1 example: <strong>Agree / Approve</strong> and <strong>Disagree / Decline</strong>.</div>
+
+<h3>Step 3 — Recipients</h3>
+<p>Use a recipient builder.</p>
+<div class="screen"><strong>Who should receive this notice?</strong><p>○ All Classes</p><p>○ Selected Classes</p><hr><strong>If Selected Classes</strong><p>☐ Class 1 &nbsp; ☐ Class 2 &nbsp; ☑ Class 6 &nbsp; ☑ Class 7 &nbsp; ☐ Class 8 &nbsp; ☑ Class 10</p></div>
+
+<h3>Step 4 — Per-Class Section Selection</h3>
+<p>Each selected class independently targets all sections or specific sections.</p>
+<table><tr><th>Class</th><th>Targeting</th></tr>
+<tr><td>Class 6</td><td><strong>All Sections</strong></td></tr>
+<tr><td>Class 7</td><td><strong>Specific:</strong> A, C</td></tr>
+<tr><td>Class 10</td><td><strong>Specific:</strong> B</td></tr></table>
+<div class="callout success">This supports <strong>Class 6 → all sections, Class 7 → A/C, Class 10 → B</strong> in one workflow.</div>
+<h3>Terminology</h3><div class="callout warning">Avoid <strong>“Random”</strong> in the UI. Use <strong>“Selected Classes”</strong> and <strong>“Specific Sections”</strong>.</div>
+</div>
+
+<h2>6. Recipient Summary & Safety Check</h2>
+<div class="card">
+<p>Before publishing, show a clear summary of who will receive the notice.</p>
+<div class="screen"><strong>Recipient Summary</strong>
+<div class="row"><span>Class 6</span><strong>All sections</strong></div>
+<div class="row"><span>Class 7</span><strong>Section A, C</strong></div>
+<div class="row"><span>Class 10</span><strong>Section B</strong></div>
+<p><strong>Total recipients:</strong> 428 students / 428 parents <span class="muted">(illustrative)</span></p></div>
+<div class="callout warning">This is an important safety mechanism: administrators should verify targeting before publishing.</div>
+</div>
+
+<h2>7. Review & Publish</h2>
+<div class="card"><p>Do not make the final action simply “Create Notice”. Use a review step.</p>
+<p><strong>Create/Edit → Save Draft OR Review Notice → Publish</strong></p>
+<p>The review screen should show title, description, dates, complete recipient summary, response requirement and response options.</p>
+<p><strong>Actions:</strong> Back &amp; Edit / Publish Notice.</p></div>
+
+<h2>8. View Notices</h2>
+<div class="card">
+<p>The main page should be a searchable and filterable management screen.</p>
+<div class="screen"><h3>Notices</h3><p><strong>[ + Create Notice ]</strong></p><p>[ Search notices... ]</p><p>[ Date ] [ Class ] [ Section ] [ Status ] [ Response ]</p>
+<table><tr><th>Notice</th><th>Audience</th><th>Start</th><th>End</th><th>Response</th><th>Status</th></tr>
+<tr><td>Parent Meeting</td><td>3 classes • 4 sections</td><td>15 Aug</td><td>20 Aug</td><td>Required</td><td><span class="status active">Active</span></td></tr>
+<tr><td>Sports Day</td><td>All classes</td><td>18 Aug</td><td>18 Aug</td><td>No</td><td><span class="status active">Active</span></td></tr>
+<tr><td>Fee Reminder</td><td>Class 8A</td><td>1 Aug</td><td>10 Aug</td><td>Required</td><td><span class="status expired">Expired</span></td></tr>
+</table></div>
+<p class="muted">Keep the table concise. Full targeting belongs on Notice Details.</p>
+</div>
+
+<h2>9. Filters</h2>
+<div class="card"><table><tr><th>Filter</th><th>Purpose</th></tr>
+<tr><td>Search</td><td>Find by title/content.</td></tr><tr><td>Date</td><td>Filter by notice dates.</td></tr>
+<tr><td>Class</td><td>Find notices targeting a class.</td></tr><tr><td>Section</td><td>Narrow to a section.</td></tr>
+<tr><td>Status</td><td>Draft, Scheduled, Active, Expired as applicable.</td></tr><tr><td>Response</td><td>Find response-enabled notices or response states.</td></tr></table>
+<div class="callout">Example: <strong>Active + Class 7 + Section A + Pending response</strong>.</div></div>
+
+<h2>10. Notice Details</h2>
+<div class="card"><div class="screen">
+<h3>Parent-Teacher Meeting <span class="status active">Active</span></h3>
+<h4>Description</h4><p>Parent-teacher meeting will be held...</p>
+<h4>Schedule</h4><div class="row"><span>Start Date</span><strong>15 Aug 2026</strong></div><div class="row"><span>End Date</span><strong>20 Aug 2026</strong></div>
+<h4>Recipients</h4><div class="row"><span>Class 6</span><strong>All sections</strong></div><div class="row"><span>Class 7</span><strong>A, C</strong></div><div class="row"><span>Class 10</span><strong>B</strong></div>
+<p><strong>428 students / 428 parents</strong></p>
+<h4>Response</h4><p>Response required — Agree / Approve, Disagree / Decline</p>
+<h4>Responses</h4><table><tr><th>Response</th><th>Count</th><th>%</th></tr><tr><td>Agree</td><td>312</td><td>73%</td></tr><tr><td>Decline</td><td>41</td><td>10%</td></tr><tr><td>No response</td><td>75</td><td>17%</td></tr></table>
+<p><strong>[ View Recipients ] &nbsp; [ View Responses ]</strong></p>
+</div></div>
+
+<h2>11. Status Model</h2>
+<div class="card"><table><tr><th>Status</th><th>Meaning</th></tr>
+<tr><td><span class="status draft">Draft</span></td><td>Created but not published.</td></tr>
+<tr><td>Scheduled</td><td>Optional: published with a future start date.</td></tr>
+<tr><td><span class="status active">Active</span></td><td>Currently within its effective period.</td></tr>
+<tr><td><span class="status expired">Expired</span></td><td>End date has passed.</td></tr></table>
+<div class="callout warning">If Release 1 has no future start dates, simplify to <strong>Draft → Active → Expired</strong>.</div></div>
+
+<h2>12. Future Releases</h2>
+<div class="card"><table><tr><th>Release</th><th>Possible Enhancements</th></tr>
+<tr><td>Release 1</td><td>Basic notices, recipient builder, responses, filters, drafts/statuses.</td></tr>
+<tr><td>Release 2</td><td>Edit/archive, scheduling, read/unread tracking, notification history, improved recipient management.</td></tr>
+<tr><td>Release 3</td><td>Attachments, images/documents, rich text, recurring notices, templates, richer response types.</td></tr>
+<tr><td>Release 4+</td><td>Automated notifications triggered by school events and broader communication capabilities.</td></tr></table></div>
+
+<h2>13. Design Decisions to Preserve</h2>
+<div class="card"><ol>
+<li><strong>One recipient-selection mechanism.</strong></li>
+<li><strong>Section selection is per class.</strong></li>
+<li><strong>Call the targeting area “Recipients” or “Send To”.</strong></li>
+<li><strong>Use “Response Required?” rather than “Type”.</strong></li>
+<li><strong>Use “Selected Classes” rather than “Random Classes”.</strong></li>
+<li><strong>Show a recipient summary before publishing.</strong></li>
+<li><strong>Use a Review &amp; Publish step.</strong></li>
+<li><strong>Keep the View Notices table concise.</strong></li>
+<li><strong>Make filters independently combinable.</strong></li>
+<li><strong>Do not over-engineer Release 1.</strong></li>
+</ol></div>
+
+<h2>14. Final Release 1 Flow</h2>
+<div class="card"><pre>
+NOTICES
+|
++-- CREATE NOTICE
+|   |
+|   +-- Notice Details
+|   |   +-- Title
+|   |   +-- Description
+|   |   +-- Start Date
+|   |   +-- End Date
+|   |
+|   +-- Response Required?
+|   |   +-- No
+|   |   +-- Yes
+|   |       +-- Response Options
+|   |
+|   +-- Recipients
+|   |   +-- All Classes
+|   |   |   +-- All Sections
+|   |   |
+|   |   +-- Selected Classes
+|   |       +-- Class A → All / Specific Sections
+|   |       +-- Class B → All / Specific Sections
+|   |       +-- Class C → All / Specific Sections
+|   |
+|   +-- Recipient Summary
+|   |
+|   +-- Review
+|       +-- Save Draft
+|       +-- Publish
+|
++-- VIEW NOTICES
+    |
+    +-- Search
+    +-- Filters
+    |   +-- Date
+    |   +-- Class
+    |   +-- Section
+    |   +-- Status
+    |   +-- Response
+    |
+    +-- Notice Details
+        +-- Notice Information
+        +-- Schedule
+        +-- Recipients
+        +-- Response Configuration
+        +-- Response Summary
+</pre></div>
+
+<footer><strong>Morwix — Notification Module / Release 1</strong><br>Product design working document. Update this document as implementation decisions evolve.</footer>
+</main></body></html>
