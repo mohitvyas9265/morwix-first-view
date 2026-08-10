@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notification Module R2 — PRD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-600: #4F46E5;
+  --brand-700: #4338CA;
+  --brand-50: #EEF2FF;
+
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-400: #94A3B8;
+  --slate-500: #64748B;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1E293B;
+  --slate-900: #0F172A;
+
+  --status-draft: #64748B;
+  --status-scheduled: #2563EB;
+  --status-active: #16A34A;
+  --status-expired: #D97706;
+
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  --radius-0: 0;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-full: 999px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--slate-700);
+  background: var(--slate-50);
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--space-48) var(--space-24) var(--space-64);
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-600);
+  margin: 0 0 var(--space-12);
+}
+
+h1 {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--slate-900);
+  margin: 0 0 var(--space-12);
+}
+
+.lede {
+  font-size: 17px;
+  color: var(--slate-600);
+  margin: 0 0 var(--space-24);
+  max-width: 60ch;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-20);
+  padding: var(--space-16) var(--space-20);
+  background: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-12);
+  font-size: 14px;
+}
+
+.meta div { color: var(--slate-500); }
+.meta strong { color: var(--slate-800); font-weight: 600; }
+
+h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  margin: var(--space-48) 0 var(--space-16);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--slate-200);
+}
+
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-20);
+  background: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-12);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--slate-100);
+  color: var(--slate-600);
+}
+
+.chip::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+.chip-draft { color: var(--status-draft); }
+.chip-scheduled { color: var(--status-scheduled); }
+.chip-active { color: var(--status-active); }
+.chip-expired { color: var(--status-expired); }
+
+.chip-dest {
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+.arrow {
+  color: var(--slate-300);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.flow-note {
+  flex-basis: 100%;
+  margin: var(--space-8) 0 0;
+  font-size: 13px;
+  color: var(--slate-500);
+}
+
+ol.items {
+  list-style: none;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+}
+
+ol.items > li {
+  counter-increment: item;
+  position: relative;
+  padding: var(--space-20) var(--space-20) var(--space-20) var(--space-48);
+  background: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-12);
+  margin-bottom: var(--space-12);
+}
+
+ol.items > li::before {
+  content: counter(item);
+  position: absolute;
+  left: var(--space-16);
+  top: var(--space-20);
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--brand-50);
+  color: var(--brand-700);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--slate-900);
+  margin-bottom: var(--space-4);
+}
+
+.item-body { margin: 0; font-size: 15px; }
+.item-body + .item-body { margin-top: var(--space-8); }
+
+.tag {
+  display: inline-block;
+  margin-left: var(--space-8);
+  padding: 1px var(--space-8);
+  border-radius: var(--radius-6);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+  background: var(--slate-100);
+  color: var(--slate-500);
+}
+
+.tag-check {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+details {
+  margin-top: var(--space-12);
+  border-top: 1px solid var(--slate-100);
+  padding-top: var(--space-12);
+}
+
+summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-600);
+  list-style: none;
+}
+
+summary::-webkit-details-marker { display: none; }
+
+summary::after {
+  content: " +";
+  font-weight: 700;
+}
+
+details[open] summary::after { content: " −"; }
+
+summary:focus-visible {
+  outline: 2px solid var(--brand-600);
+  outline-offset: 3px;
+  border-radius: var(--radius-6);
+}
+
+details ul {
+  margin: var(--space-12) 0 0;
+  padding-left: var(--space-20);
+  font-size: 14px;
+  color: var(--slate-600);
+}
+
+details li { margin-bottom: var(--space-4); }
+
+.callout {
+  padding: var(--space-20);
+  background: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-left: 3px solid var(--status-expired);
+  border-radius: var(--radius-12);
+  font-size: 15px;
+}
+
+.callout p { margin: 0 0 var(--space-8); }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: var(--slate-900); }
+
+footer {
+  margin-top: var(--space-48);
+  padding-top: var(--space-20);
+  border-top: 1px solid var(--slate-200);
+  font-size: 13px;
+  color: var(--slate-400);
+}
+
+footer a { color: var(--slate-500); }
+
+@media (max-width: 640px) {
+  .wrap { padding: var(--space-32) var(--space-16) var(--space-48); }
+  h1 { font-size: 27px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Notification Module — Release 2</p>
+  <h1>Notice enhancements and open questions</h1>
+  <p class="lede">Changes agreed in the 10 August discussion, building on the Release 1 notification module. Five items are scoped for R2; four need a decision before they can be scoped.</p>
+
+  <div class="meta">
+    <div>Status <strong>Draft for review</strong></div>
+    <div>Discussed <strong>10 Aug</strong></div>
+    <div>Builds on <strong>Notification Module R1</strong></div>
+    <div>Source <strong>Meeting notes</strong></div>
+  </div>
+
+  <h2>Notice lifecycle after this release</h2>
+  <div class="flow">
+    <span class="chip chip-draft">Draft</span>
+    <span class="arrow">&rarr;</span>
+    <span class="chip chip-scheduled">Scheduled</span>
+    <span class="arrow">&rarr;</span>
+    <span class="chip chip-active">Active</span>
+    <span class="arrow">&rarr;</span>
+    <span class="chip chip-expired">Expired</span>
+    <span class="arrow">&rarr;</span>
+    <span class="chip chip-dest">History</span>
+    <p class="flow-note">Expiry becomes a real transition rather than an end state: once a notice expires it leaves the working list and lands in History. Statuses and colors are unchanged from R1.</p>
+  </div>
+
+  <h2>Scoped for R2</h2>
+  <ol class="items">
+    <li>
+      <span class="item-title">Remind the author before a scheduled notice publishes</span>
+      <p class="item-body">A notice sitting in Scheduled should prompt the person who created it ahead of its go-live date, so it can still be edited or cancelled while it is unpublished.</p>
+      <details>
+        <summary>Open detail</summary>
+        <ul>
+          <li>How far ahead does the reminder fire — one day, or configurable?</li>
+          <li>Does it go to the author only, or to all notice admins?</li>
+          <li>Channel: in-app, email, or both.</li>
+        </ul>
+      </details>
+    </li>
+    <li>
+      <span class="item-title">Expired notices move into History</span>
+      <p class="item-body">When a notice passes its expiry date it stops appearing in the active working list and is written to History, where it stays readable. The Expired status is kept so a notice is never silently removed.</p>
+    </li>
+    <li>
+      <span class="item-title">A notice that requires a response must carry an expiry date</span>
+      <p class="item-body">Turning on "response required" makes the expiry date mandatory — a notice cannot ask for a response without stating when the response is due. Publishing is blocked until the date is set.</p>
+      <details>
+        <summary>Open detail</summary>
+        <ul>
+          <li>Read from the notes as expiry <em>date</em>; confirm whether a time of day is also needed.</li>
+          <li>What happens to a response submitted after expiry — rejected, or accepted and flagged late?</li>
+        </ul>
+      </details>
+    </li>
+    <li>
+      <span class="item-title">Remove the Recent tab from Overview</span>
+      <p class="item-body">The Recent tab comes out of the Overview screen. Its content is already reachable from the notice list, so the tab was duplicating a view rather than adding one.</p>
+    </li>
+    <li>
+      <span class="item-title">Notices becomes a filtered view of Overview<span class="tag tag-check">Confirm</span></span>
+      <p class="item-body">Overview holds the full set of notices, and the Notices view shows a subset of it — the same records under a filter, not a separately maintained list.</p>
+      <p class="item-body">Recorded as agreed but worth restating before build: which filter defines the subset (currently active only, or excluding History) needs pinning down, since it decides whether Notices and Overview can share one data source.</p>
+    </li>
+  </ol>
+
+  <h2>Needs a decision</h2>
+  <div class="callout">
+    <p><strong>These four are unresolved.</strong> They were raised as questions in the discussion, not agreed as scope. Each needs an owner and an answer before it can be estimated, and items 3 and 4 in particular would change the notice data model.</p>
+    <p>Nothing below should be treated as committed for R2.</p>
+  </div>
+
+  <ol class="items" style="margin-top: var(--space-16)">
+    <li>
+      <span class="item-title">Do notices need templates?<span class="tag">Question</span></span>
+      <p class="item-body">Whether staff compose every notice from scratch or start from reusable templates. Affects whether R2 needs template storage, permissions for who can edit a template, and a template picker in the compose flow.</p>
+    </li>
+    <li>
+      <span class="item-title">What are the response types?<span class="tag">Question</span></span>
+      <p class="item-body">"Response required" currently has no defined shape. The set of types — acknowledgement, yes/no, single choice, free text — needs deciding, because it determines the response storage model and how responses are reported back to staff.</p>
+    </li>
+    <li>
+      <span class="item-title">Multilingual notices behind a toggle<span class="tag">Question</span></span>
+      <p class="item-body">Notices authored in more than one language, shown per recipient, gated behind a toggle so schools that do not need it are unaffected. Open: which languages, whether translation is manual or assisted, and what a reader sees when their language is missing.</p>
+    </li>
+    <li>
+      <span class="item-title">Remind parents a day before a notice expires<span class="tag">Question</span></span>
+      <p class="item-body">A reminder to parents the day before expiry, distinct from item 1 in the scoped list, which reminds staff before publishing. Likely only meaningful for notices requiring a response — needs confirming, along with whether parents who have already responded are excluded.</p>
+    </li>
+  </ol>
+
+  <h2>Reading of the source notes</h2>
+  <p class="item-body">Two readings were inferred rather than stated outright, and are flagged inline above: "expiry data" is taken to mean expiry <em>date</em>, and "notice should be subset of Overview tab" is taken to mean the Notices view filters Overview's records. Correct either before build if the intent was different.</p>
+
+  <footer>
+    Notification Module R2 — PRD. Part of <a href="/">Morwix</a>. See also <a href="/morwix_notification_module_release_1/">R1 PRD</a> and the <a href="/notification-prototype/">R1 prototype</a>.
+  </footer>
+
+</div>
+</body>
+</html>
