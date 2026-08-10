@@ -13,9 +13,10 @@ const CLASSES = [
 ];
 const sizeOf = (c) => Object.values(c.sections).reduce((a,b)=>a+b,0);
 
-/* ---- Editable state (defaults mirror the Notice Details demo) ---- */
+/* ---- Editable state (defaults mirror the Notice Details demo) ----
+   No separate "All classes" mode: checking every class IS "all classes".
+   The "Select all" action is just a shortcut over the same checklist. ---- */
 const state = {
-  mode:'selected',
   classes:{
     'Grade 6':  { on:true,  mode:'all',      secs:[] },
     'Grade 7':  { on:true,  mode:'specific', secs:['A','C'] },
@@ -61,8 +62,7 @@ function goStep(n){
     num.innerHTML = k<n ? '<svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"/></svg>' : k;
   });
   document.querySelectorAll('#stepper .step-line').forEach(l=> l.classList.toggle('done', +l.dataset.line < n));
-  if(n===3) renderSummary();
-  if(n===4) renderReview();
+  if(n===3) renderReview();
   document.querySelector('.content').scrollTop = 0;
 }
 /* Clickable stepper */
@@ -81,24 +81,16 @@ resp.addEventListener('click', ()=>{
   lab.style.color = on ? 'var(--brand-600)' : 'var(--text-tertiary)';
 });
 
-/* ==================== STEP 2: recipient builder ==================== */
+/* ==================== STEP 2: recipient builder ====================
+   Single unified checklist — no "All classes / Selected classes" mode
+   switch. Checking every class IS "all classes"; "Select all" is a
+   one-tap shortcut over the same list, not a different screen. ==== */
 const classList = document.getElementById('class-list');
-const modeCards = document.querySelectorAll('.radio-card[data-mode]');
-modeCards.forEach(card=>card.addEventListener('click', ()=>{
-  state.mode = card.dataset.mode;
-  modeCards.forEach(c=>{ const on=c===card; c.classList.toggle('on', on); c.querySelector('.radio').classList.toggle('on', on); });
-  renderClassList();
-}));
 
 function renderClassList(){
   const btn = document.getElementById('toggle-all-classes');
-  if(state.mode==='all'){
-    btn.style.display='none';
-    classList.innerHTML = `<div class="callout" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Every class and every section (${CLASSES.length} classes) will receive this notice.</span></div>`;
-    updateCount();
-    return;
-  }
-  btn.style.display='';
+  const allOn = CLASSES.every(c=>state.classes[c.id].on);
+  btn.textContent = allOn ? 'Clear all' : 'Select all';
   classList.innerHTML = CLASSES.map(c=>{
     const st = state.classes[c.id];
     const secKeys = Object.keys(c.sections);
@@ -132,15 +124,14 @@ classList.addEventListener('click', (e)=>{
 document.getElementById('toggle-all-classes').addEventListener('click', ()=>{
   const anyOff = CLASSES.some(c=>!state.classes[c.id].on);
   CLASSES.forEach(c=> state.classes[c.id].on = anyOff);
-  document.getElementById('toggle-all-classes').textContent = anyOff ? 'Clear all' : 'Select all';
   renderClassList();
 });
 
 /* ---- recipient math ---- */
-function activeClasses(){ return state.mode==='all' ? CLASSES.slice() : CLASSES.filter(c=>state.classes[c.id].on); }
+function activeClasses(){ return CLASSES.filter(c=>state.classes[c.id].on); }
 function classCount(c){
   const st = state.classes[c.id];
-  if(state.mode==='all' || st.mode==='all') return sizeOf(c);
+  if(st.mode==='all') return sizeOf(c);
   return st.secs.reduce((a,s)=>a+(c.sections[s]||0),0);
 }
 function totalRecipients(){ return activeClasses().reduce((a,c)=>a+classCount(c),0); }
@@ -153,37 +144,34 @@ function updateCount(){
     : `<strong>≈ ${total.toLocaleString()} recipients</strong> across <strong>${n}</strong> ${n===1?'class':'classes'} will receive this notice.`;
 }
 
-/* ==================== STEP 3: summary ==================== */
+/* ==================== STEP 3: Review & Publish (merged Summary + Review) ==================== */
 function recipientRowsHTML(){
   return activeClasses().map(c=>{
     const st = state.classes[c.id];
-    const allSecs = state.mode==='all' || st.mode==='all';
-    const secs = allSecs ? '<span class="tag tag--all">All sections</span>' : st.secs.map(s=>`<span class="tag">${s}</span>`).join('') || '<span class="tag">—</span>';
+    const secs = st.mode==='all' ? '<span class="tag tag--all">All sections</span>' : st.secs.map(s=>`<span class="tag">${s}</span>`).join('') || '<span class="tag">—</span>';
     return `<div class="summary-row"><div class="ico">${c.id.replace('Grade ','')}</div><div class="grow"><div style="font-weight:600">${c.id}</div><div class="secs">${secs}</div></div><span class="muted body-sm">≈ ${classCount(c)}</span></div>`;
   }).join('');
 }
-function renderSummary(){
-  document.getElementById('summary-list').innerHTML = recipientRowsHTML();
-  document.getElementById('sum-total').textContent = totalRecipients().toLocaleString();
-  document.getElementById('sum-classes').textContent = activeClasses().length;
-}
 
-/* confirm checkbox gates "Continue to review" */
+/* confirm checkbox gates "Publish notice" */
 const confirmBox = document.getElementById('confirm-recipients');
-const toReview = document.getElementById('to-review');
-toReview.disabled = true;
+const publishBtn = document.getElementById('publish-btn');
+publishBtn.disabled = true;
 confirmBox.addEventListener('click', ()=>{
   const chk = confirmBox.querySelector('.check');
   chk.classList.toggle('on');
-  toReview.disabled = !chk.classList.contains('on');
+  publishBtn.disabled = !chk.classList.contains('on');
 });
 
-/* ==================== STEP 4: review ==================== */
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function fmt(d){ if(!d) return 'Not set'; const [y,m,day]=d.split('-').map(Number); return `${day} ${MONTHS[m-1]} ${y}`; }
 function statusFor(s,e){ if(!s||!e) return 'draft'; if(s>TODAY) return 'scheduled'; if(e<TODAY) return 'expired'; return 'active'; }
 
 function renderReview(){
+  document.getElementById('summary-list').innerHTML = recipientRowsHTML();
+  document.getElementById('sum-total').textContent = totalRecipients().toLocaleString();
+  document.getElementById('sum-classes').textContent = activeClasses().length;
+
   const title = document.getElementById('f-title').value || 'Untitled notice';
   const desc  = document.getElementById('f-desc').value || '—';
   const start = document.getElementById('f-start').value, end = document.getElementById('f-end').value;
@@ -192,7 +180,6 @@ function renderReview(){
   document.getElementById('rv-desc').textContent = desc;
   document.getElementById('rv-dates').innerHTML = `${fmt(start)} &nbsp;–&nbsp; ${fmt(end)}`;
   document.getElementById('rv-response').innerHTML = respOn ? '<span class="pill pill--req">Required</span>' : '<span class="pill pill--no">Not required</span>';
-  document.getElementById('rv-recipients-list').innerHTML = recipientRowsHTML();
 
   const st = statusFor(start,end);
   const badge = document.getElementById('will-status');

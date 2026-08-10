@@ -143,12 +143,14 @@ body {
 .ico--active{background:var(--green-50);color:var(--green-600);} .ico--sched{background:var(--blue-50);color:var(--blue-600);}
 .ico--draft{background:var(--slate-100);color:var(--slate-500);} .ico--expired{background:var(--amber-50);color:var(--amber-600);}
 
-.entry{display:flex;gap:var(--sp-lg);align-items:flex-start;padding:var(--sp-2xl);border:1px solid var(--border);border-radius:var(--r-lg);background:var(--bg-surface);cursor:pointer;transition:.14s;box-shadow:var(--el-sm);}
-.entry:hover{border-color:var(--brand-300);box-shadow:var(--el-md);transform:translateY(-1px);}
-.entry .ico{width:46px;height:46px;border-radius:var(--r-md);background:var(--brand-50);color:var(--brand-600);display:flex;align-items:center;justify-content:center;flex:none;}
-.entry .ico svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;}
-.entry .arrow{margin-left:auto;color:var(--text-tertiary);align-self:center;}
-.entry .arrow svg{width:20px;height:20px;stroke-width:2;}
+/* ---------- School header + module section (Overview) ---------- */
+.school-head{display:flex;align-items:center;gap:var(--sp-lg);margin-bottom:var(--sp-2xl);}
+.school-logo{width:52px;height:52px;border-radius:var(--r-lg);background:linear-gradient(135deg,var(--brand-500),var(--brand-700));color:#fff;font-weight:700;font-size:19px;letter-spacing:-.01em;display:flex;align-items:center;justify-content:center;box-shadow:var(--el-md);flex:none;}
+.module{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-2xl);box-shadow:var(--el-sm);}
+.module-eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--brand-600);margin-bottom:var(--sp-md);}
+.module-head{display:flex;align-items:flex-start;gap:var(--sp-lg);}
+.module-head .sub{max-width:520px;}
+.module-head .actions{margin-left:auto;display:flex;gap:var(--sp-sm);flex:none;}
 
 /* ---------- Forms ---------- */
 .field{display:flex;flex-direction:column;gap:var(--sp-sm);margin-bottom:var(--sp-xl);}
@@ -184,14 +186,6 @@ body {
 .radio.on{border-color:var(--bg-brand);}
 .radio.on::after{transform:scale(1);}
 .opt-row{display:flex;align-items:center;gap:var(--sp-md);cursor:pointer;}
-
-/* Radio cards */
-.radio-cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-lg);}
-.radio-card{display:flex;gap:var(--sp-md);align-items:flex-start;padding:var(--sp-lg);border:1px solid var(--border);border-radius:var(--r-md);cursor:pointer;transition:.12s;background:#fff;}
-.radio-card:hover{border-color:var(--brand-300);}
-.radio-card.on{border-color:var(--bg-brand);background:var(--brand-50);box-shadow:0 0 0 1px var(--bg-brand) inset;}
-.radio-card .t{font-weight:600;}
-.radio-card .d{color:var(--text-secondary);font-size:13px;line-height:18px;margin-top:2px;}
 
 /* Segmented */
 .segmented{display:inline-flex;background:var(--slate-100);border-radius:var(--r-md);padding:3px;gap:2px;}
