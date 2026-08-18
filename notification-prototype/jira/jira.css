@@ -1,0 +1,103 @@
+/* ============================================================
+   Morwix — Notification Module (R1) · Internal board
+   Reuses the same design tokens as the desktop/mobile prototypes.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --brand-50:#EEF2FF;--brand-100:#E0E7FF;--brand-200:#C7D2FE;--brand-500:#6366F1;--brand-600:#4F46E5;--brand-700:#4338CA;
+  --slate-50:#F8FAFC;--slate-100:#F1F5F9;--slate-200:#E2E8F0;--slate-300:#CBD5E1;--slate-400:#94A3B8;--slate-500:#64748B;--slate-600:#475569;--slate-700:#334155;--slate-800:#1E293B;--slate-900:#0F172A;
+  --green-50:#ECFDF5;--green-500:#10B981;--green-600:#059669;--green-700:#047857;
+  --amber-50:#FFFBEB;--amber-500:#F59E0B;--amber-600:#D97706;--amber-700:#B45309;
+  --red-50:#FEF2F2;--red-500:#EF4444;--red-600:#DC2626;--red-700:#B91C1C;
+  --blue-50:#EFF6FF;--blue-500:#3B82F6;--blue-600:#2563EB;--blue-700:#1D4ED8;
+
+  --bg-app:var(--slate-50);--bg-surface:#fff;--bg-subtle:var(--slate-100);
+  --text-primary:var(--slate-900);--text-secondary:var(--slate-600);--text-tertiary:var(--slate-400);
+  --border:var(--slate-200);--border-strong:var(--slate-300);
+  --r-sm:6px;--r-md:8px;--r-lg:12px;--r-xl:16px;--r-full:999px;
+  --el-sm:0 1px 2px rgba(15,23,42,.04),0 2px 4px -1px rgba(15,23,42,.06);
+  --el-md:0 2px 4px -2px rgba(15,23,42,.06),0 4px 10px -2px rgba(15,23,42,.08);
+
+  /* Workflow status colors (distinct from notice-status colors used elsewhere) */
+  --wf-backlog-bg:var(--slate-100); --wf-backlog-fg:var(--slate-600); --wf-backlog-dot:var(--slate-400);
+  --wf-todo-bg:var(--blue-50);      --wf-todo-fg:var(--blue-700);     --wf-todo-dot:var(--blue-500);
+  --wf-progress-bg:var(--amber-50); --wf-progress-fg:var(--amber-700);--wf-progress-dot:var(--amber-500);
+  --wf-review-bg:var(--brand-50);   --wf-review-fg:var(--brand-700);  --wf-review-dot:var(--brand-500);
+  --wf-done-bg:var(--green-50);     --wf-done-fg:var(--green-700);    --wf-done-dot:var(--green-500);
+
+  --pr-high-bg:var(--red-50); --pr-high-fg:var(--red-700);
+  --pr-med-bg:var(--amber-50); --pr-med-fg:var(--amber-700);
+  --pr-low-bg:var(--slate-100); --pr-low-fg:var(--slate-600);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg-app);color:var(--text-primary);font-size:14px;line-height:20px;-webkit-font-smoothing:antialiased;}
+button,select,input{font:inherit;color:inherit;}
+
+/* ---------- Top bar ---------- */
+.topbar{background:var(--bg-surface);border-bottom:1px solid var(--border);padding:18px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.topbar .brand{display:flex;align-items:center;gap:12px;}
+.topbar .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand-500),var(--brand-700));color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:var(--el-sm);}
+.topbar h1{font-size:16px;font-weight:700;letter-spacing:-.01em;}
+.topbar .sub{font-size:12.5px;color:var(--text-tertiary);margin-top:1px;}
+.topbar .back{margin-left:auto;font-size:13px;font-weight:600;color:var(--brand-600);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.topbar .back svg{width:16px;height:16px;stroke:currentColor;}
+
+/* ---------- Toolbar ---------- */
+.toolbar{background:var(--bg-surface);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.toolbar input[type="search"]{flex:1;min-width:200px;max-width:320px;height:36px;border:1px solid var(--border);border-radius:var(--r-md);padding:0 12px;background:#fff;}
+.toolbar input[type="search"]:focus{outline:none;border-color:var(--brand-500);box-shadow:0 0 0 3px var(--brand-100);}
+.toolbar select{height:36px;border:1px solid var(--border);border-radius:var(--r-md);padding:0 10px;background:#fff;cursor:pointer;}
+.toolbar .counts{margin-left:auto;display:flex;gap:14px;font-size:12.5px;color:var(--text-secondary);}
+.toolbar .counts b{color:var(--text-primary);}
+.toolbar .reset{height:36px;padding:0 12px;border-radius:var(--r-md);border:1px solid var(--border-strong);background:#fff;font-weight:600;font-size:12.5px;color:var(--text-secondary);cursor:pointer;}
+.toolbar .reset:hover{background:var(--slate-50);}
+
+/* ---------- Board ---------- */
+.board{display:flex;gap:16px;padding:20px 28px;overflow-x:auto;align-items:flex-start;}
+.column{background:var(--bg-subtle);border-radius:var(--r-lg);width:300px;flex:none;display:flex;flex-direction:column;max-height:calc(100vh - 150px);}
+.column-head{padding:14px 14px 10px;display:flex;align-items:center;gap:8px;position:sticky;top:0;}
+.column-head .dot{width:8px;height:8px;border-radius:var(--r-full);flex:none;}
+.column-head .name{font-weight:700;font-size:13px;}
+.column-head .count{margin-left:auto;font-size:12px;font-weight:700;color:var(--text-tertiary);background:#fff;border-radius:var(--r-full);padding:1px 8px;}
+.column-cards{padding:2px 10px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1;}
+.column-empty{padding:20px 8px;text-align:center;color:var(--text-tertiary);font-size:12.5px;}
+
+/* ---------- Card ---------- */
+.card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;box-shadow:var(--el-sm);}
+.card-top{display:flex;align-items:center;gap:6px 8px;margin-bottom:8px;flex-wrap:wrap;}
+.card-id{font-size:11px;font-weight:700;color:var(--text-tertiary);letter-spacing:.02em;white-space:nowrap;}
+.pr{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 8px;border-radius:var(--r-full);}
+.pr--high{background:var(--pr-high-bg);color:var(--pr-high-fg);}
+.pr--medium{background:var(--pr-med-bg);color:var(--pr-med-fg);}
+.pr--low{background:var(--pr-low-bg);color:var(--pr-low-fg);}
+.card-epic{margin-left:auto;font-size:10.5px;font-weight:600;color:var(--brand-600);background:var(--brand-50);padding:2px 8px;border-radius:var(--r-full);white-space:nowrap;}
+.card-title{font-weight:600;font-size:13.5px;line-height:18px;margin-bottom:6px;}
+.card-story{font-size:12.5px;color:var(--text-secondary);line-height:18px;margin-bottom:8px;}
+.ac-toggle{font-size:12px;font-weight:600;color:var(--brand-600);cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:8px;}
+.ac-toggle svg{width:13px;height:13px;stroke:currentColor;transition:transform .12s;}
+.ac-toggle.open svg{transform:rotate(90deg);}
+.ac-list{display:none;list-style:none;margin:0 0 10px;padding:0;}
+.ac-list.open{display:block;}
+.ac-list li{font-size:12px;color:var(--text-secondary);line-height:17px;padding:4px 0 4px 18px;position:relative;border-top:1px dashed var(--border);}
+.ac-list li:first-child{border-top:none;}
+.ac-list li::before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:2px;background:var(--brand-200);}
+.card-foot{display:flex;gap:8px;padding-top:8px;border-top:1px solid var(--border);}
+.card-foot select{flex:1;min-width:0;font-size:12px;height:30px;border:1px solid var(--border);border-radius:var(--r-sm);padding:0 6px;background:#fff;cursor:pointer;}
+.card-foot select:focus{outline:none;border-color:var(--brand-500);}
+.assignee-select{background-image:none;}
+.avatar-dot{width:16px;height:16px;border-radius:var(--r-full);flex:none;background:var(--slate-300);display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;}
+
+/* status pill legend colors reused for the select's data-status coloring via wrapper */
+.status-wrap{display:flex;align-items:center;gap:6px;flex:1;min-width:0;}
+.status-dot{width:7px;height:7px;border-radius:var(--r-full);flex:none;}
+.status-dot--backlog{background:var(--wf-backlog-dot);}
+.status-dot--todo{background:var(--wf-todo-dot);}
+.status-dot--progress{background:var(--wf-progress-dot);}
+.status-dot--review{background:var(--wf-review-dot);}
+.status-dot--done{background:var(--wf-done-dot);}
+
+@media (max-width: 700px){
+  .board{padding:14px;}
+  .column{width:82vw;}
+}

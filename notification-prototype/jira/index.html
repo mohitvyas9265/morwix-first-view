@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morwix — Notification Module (R1) · Internal board</title>
+<link rel="stylesheet" href="jira.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">M</div>
+    <div>
+      <h1>Notification Module (R1) — Internal board</h1>
+      <div class="sub">User stories derived from the R1 flow · seeded for planning, not a real Jira instance</div>
+    </div>
+  </div>
+  <a class="back" href="../index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to prototype
+  </a>
+</header>
+
+<div class="toolbar">
+  <input type="search" id="search" placeholder="Search by title or ID…">
+  <select id="filter-epic"><option value="">All epics</option></select>
+  <select id="filter-assignee"><option value="">All assignees</option></select>
+  <select id="filter-priority"><option value="">All priorities</option></select>
+  <button class="reset" id="reset-board">Reset assignments</button>
+  <div class="counts" id="counts"></div>
+</div>
+
+<main class="board" id="board"></main>
+
+<script src="jira.js"></script>
+</body>
+</html>

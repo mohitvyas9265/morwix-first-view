@@ -32,6 +32,8 @@ This is a static site with no build step — every page is plain HTML/CSS/JS, de
 | `/morwix_notification_module_release_1/` | Notification Module R1 — PRD | `morwix_notification_module_release_1/index.html` |
 | `/notification-prototype/` | Notification Module R1 — desktop clickable prototype | `notification-prototype/` |
 | `/notification-prototype/mobile/` | Notification Module R1 — mobile app view (phone-framed mockup gallery) | `notification-prototype/mobile/` |
+| `/notification-prototype/jira/` | Notification Module R1 — internal ticket board (user stories from the flow, assignable, status columns) | `notification-prototype/jira/` |
+| `/mom/` | Notification Module R2 — PRD (in progress) | `mom/index.html` |
 
 If you add a new top-level folder with an `index.html` in it, it becomes a new route automatically — see [Adding a new page or prototype](#adding-a-new-page-or-prototype).
 
@@ -47,14 +49,20 @@ morwix-first-view/
 │   └── index.html                         # interactive PRD viewer
 ├── morwix_notification_module_release_1/
 │   └── index.html                         # Notification Module R1 PRD
+├── mom/
+│   └── index.html                         # Notification Module R2 PRD (in progress)
 └── notification-prototype/                # Notification Module R1 prototypes
     ├── index.html                         # desktop prototype (multi-screen SPA)
     ├── styles.css
     ├── app.js
-    └── mobile/                            # mobile app view (phone mockup gallery)
+    ├── mobile/                            # mobile app view (phone mockup gallery)
+    │   ├── index.html
+    │   ├── mobile.css
+    │   └── mobile.js
+    └── jira/                              # internal ticket board (user stories, assignable)
         ├── index.html
-        ├── mobile.css
-        └── mobile.js
+        ├── jira.css
+        └── jira.js
 ```
 
 > **Caveat on `/app`:** the files under `app/assets/` (e.g. `index-DH7xwFsK.js`) are a **built output** — hashed filenames from a bundler (Vite), with no source checked into this repo. Don't hand-edit them; if you need to change that app, find the original source project, build it there, and copy the output here.
